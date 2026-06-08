@@ -1,17 +1,73 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+).slice(0, 3);
+
+const projects = [
+  {
+    name: 'ZeroCharts',
+    description: 'Crie seu próprio chart semanal com seus scrobbles do Last.fm.',
+    url: 'https://zerocharts.com.br',
+    tag: 'SaaS',
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <section class="max-w-4xl mx-auto px-4 pt-20 pb-16">
+    <div class="max-w-xl">
+      <p class="text-zinc-400 text-sm font-medium tracking-widest uppercase mb-4">Bruno7kp</p>
+      <h1 class="text-4xl sm:text-5xl font-bold text-white leading-tight mb-6">
+        Fanático por gráficos<br/>e música.
+      </h1>
+      <p class="text-zinc-400 text-lg leading-relaxed">
+        Desenvolvedor e criador do <a href="https://zerocharts.com.br" class="text-white underline underline-offset-4 hover:text-zinc-300 transition-colors">ZeroCharts</a>.
+        Aqui escrevo sobre desenvolvimento, música e projetos pessoais.
+      </p>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-4 pb-16">
+    <h2 class="text-xs font-semibold tracking-widest uppercase text-zinc-500 mb-6">Projetos</h2>
+    <div class="grid sm:grid-cols-2 gap-4">
+      {projects.map(p => (
+        <a
+          href={p.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group border border-zinc-800 rounded-xl p-5 hover:border-zinc-600 transition-colors"
+        >
+          <div class="flex items-start justify-between mb-2">
+            <span class="font-semibold text-white group-hover:text-zinc-200">{p.name}</span>
+            <span class="text-xs bg-zinc-800 text-zinc-400 rounded-full px-2 py-0.5">{p.tag}</span>
+          </div>
+          <p class="text-sm text-zinc-400">{p.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  {posts.length > 0 && (
+    <section class="max-w-4xl mx-auto px-4 pb-20">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xs font-semibold tracking-widest uppercase text-zinc-500">Posts recentes</h2>
+        <a href="/blog" class="text-xs text-zinc-500 hover:text-zinc-300 transition-colors">Ver todos →</a>
+      </div>
+      <ul class="divide-y divide-zinc-800">
+        {posts.map(post => (
+          <li>
+            <a href={`/blog/${post.slug}`} class="group flex items-start justify-between py-4 gap-4 hover:text-zinc-300 transition-colors">
+              <span class="text-white group-hover:text-zinc-300 transition-colors">{post.data.title}</span>
+              <time class="text-xs text-zinc-500 shrink-0 pt-1">
+                {post.data.date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' })}
+              </time>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+</Layout>

@@ -1,0 +1,80 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'B7KP',
+  description = 'Fanático por gráficos e música. Criador do ZeroCharts.',
+  image = '/og.png',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="google-site-verification" content="GY37Ur1hg8fHKQfYTJGIUQYo0hl6FRjD5CTE3S6wxNU" />
+    <meta name="google-adsense-account" content="ca-pub-4738400186838722" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126624153-1"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-126624153-1');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4738400186838722" crossorigin="anonymous"></script>
+
+    <!-- Cookie consent -->
+    <script src="//cdn.cookie-script.com/s/ba9c3b1aa5f2b638ed00b833936fa391.js" is:inline></script>
+  </head>
+  <body class="bg-zinc-950 text-zinc-100 min-h-screen flex flex-col">
+    <header class="border-b border-zinc-800 sticky top-0 z-50 bg-zinc-950/90 backdrop-blur">
+      <div class="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
+        <a href="/" class="font-bold text-lg tracking-tight text-white hover:text-zinc-300 transition-colors">B7KP</a>
+        <nav class="flex gap-6 text-sm text-zinc-400">
+          <a href="/blog" class="hover:text-white transition-colors">Blog</a>
+          <a href="/sobre" class="hover:text-white transition-colors">Sobre</a>
+          <a href="https://zerocharts.com.br" target="_blank" rel="noopener" class="hover:text-white transition-colors">ZeroCharts</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <footer class="border-t border-zinc-800 mt-20">
+      <div class="max-w-4xl mx-auto px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
+        <span>© {new Date().getFullYear()} Bruno7kp</span>
+        <div class="flex gap-4">
+          <a href="/privacidade" class="hover:text-zinc-300 transition-colors">Privacidade</a>
+          <a href="mailto:bruno7kp@gmail.com" class="hover:text-zinc-300 transition-colors">Contato</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
