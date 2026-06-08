@@ -7,7 +7,7 @@ tags: [zerocharts, lastfm, aniversario]
 
 Em 2016, comecei a montar um ranking semanal das músicas que mais ouvi, inspirado na Billboard Hot 100 mas baseado nos meus próprios scrobbles do Last.fm. Durante anos, esse projeto evoluiu por versões cada vez mais completas.
 
-Em 2020, o site original estava lento demais e criei o [Charts B7KP](https://charts.b7kp.com): uma versão mais leve que qualquer pessoa pode usar para gerar seu chart semanal a partir dos scrobbles do Last.fm.
+Em 2018, o site original estava lento demais e criei o [Charts B7KP](https://charts.b7kp.com): uma versão mais leve que qualquer pessoa pode usar para gerar seu chart semanal a partir dos scrobbles do Last.fm.
 
 Em 2026, para comemorar os **10 anos** do projeto, relancei tudo como o **ZeroCharts**: uma plataforma completa com muito mais recursos, disponível em [zerocharts.com.br](https://zerocharts.com.br).
 
